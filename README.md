@@ -5,7 +5,12 @@ L’objectif est de créer un modèle NLP basé sur un modèle pré-entraîné c
 déterminer si un message français sur twitter relève du domaine de l’observation
 d’un agriculteur ou non.
 
+Architectutre en phase d'entrainement:
+
 ![Architectutre en phase d'entrainement](./src/Architectutre_Entrainement.jpg)
+
+Architectutre en phase d'utilisation (inférence):
+
 ![Architectutre en phase d'utilisation](./src/Architecture_Utilisation.jpg)
 
 
@@ -23,23 +28,3 @@ l'accuracy T+3 est donc mesurée chez le model M4 et M3
 l'accuracy T+4 est donc mesurée chez le model M4
 
 Chaque modele est entrainé en validation croisée (3 folds)
-
-
-epochs = 500
-n_neurone_cache = 100
-n_layer = 2
-n_past = 10
-n_future_max = 4
-n_fold = 3
-
-Pour n_future de 1 à n_future_max Faire:
-
-    x, y = creerXY(n_past=n_past, n_future=n_future) // metre en forme l'input et l'output pour l'entrainement en fonction de la taille de la fenetre passé (n_past) et le nombre de prediction à faire dans le futur (n_future)
-
-    Pour X_train, Y_train, X_val, Y_val dans validation_croisée(x, y, n_fold) Faire:
-
-        // creer le modelen fonction du nombre de couche, neurones, fenetre de lecteur, nb prediction future
-        modele = construire_le_modele(n_neurone_cache=n_neurone_cache, n_layer=n_layer, n_past=n_past, n_future=n_future)
-        historique = entrainer(modele, X_train, Y_train, X_val, Y_val)
-
-// historique contient les accuracy T+1 à T+n_future pour chaque modele M d'indice n_future (n_fold fois)
